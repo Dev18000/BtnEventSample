@@ -1,0 +1,24 @@
+﻿@page "/"
+
+@inject IJSRuntime JsRuntime
+
+@{
+    <p>какой то текст</p>
+    <button>кнопка точка отступа, чтоб табуляцию переключить</button>
+    <button @onkeydown="@((e)=>KeyDown(e))"
+    @onclick="@(()=>OnCliCk())">Test event with keyboard</button>
+}
+
+@code{
+    public async void KeyDown(KeyboardEventArgs e)
+    {
+        if (e.Code == "Enter" || e.Code == "NumpadEnter")
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "KeyDown!");
+        }
+    }
+    public async void OnCliCk()
+    {
+        await JsRuntime.InvokeVoidAsync("alert", "OnClick!");
+    }
+}
